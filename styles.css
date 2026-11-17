@@ -1,0 +1,54 @@
+:root {
+  --bg: #0f172a; --card: #1e293b; --line: #334155; --text: #e2e8f0; --muted: #94a3b8;
+  --crit: #f97316; --norm: #3b82f6; --accent: #38bdf8; --danger: #ef4444; --ok: #22c55e;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, Segoe UI, Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.45; }
+.top { padding: 24px 20px 8px; max-width: 1200px; margin: auto; }
+.top h1 { margin: 0; font-size: 2rem; color: var(--accent); }
+.top p { margin: 4px 0 0; color: var(--muted); }
+main { max-width: 1200px; margin: auto; padding: 12px 20px 40px; display: grid; gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.card h2 { margin: 0 0 12px; font-size: 1.15rem; }
+h3 { margin: 18px 0 8px; font-size: 1rem; }
+form { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; align-items: end; }
+label { display: flex; flex-direction: column; gap: 4px; font-size: .8rem; color: var(--muted); }
+label.wide { grid-column: span 2; }
+label.inline { flex-direction: row; align-items: center; gap: 8px; font-size: .9rem; }
+input { background: var(--bg); border: 1px solid var(--line); color: var(--text); padding: 8px; border-radius: 8px; font-size: .95rem; width: 100%; }
+label.inline input { width: 110px; }
+input:focus { outline: 2px solid var(--accent); }
+button { background: #475569; color: #fff; border: 0; padding: 9px 14px; border-radius: 8px; cursor: pointer; font-size: .9rem; }
+button:hover { filter: brightness(1.15); }
+button.primary { background: var(--norm); }
+button.danger { background: var(--danger); }
+button.small { padding: 4px 8px; font-size: .75rem; margin-left: 4px; }
+.actions { display: flex; gap: 8px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+.alert { background: #7f1d1d; border: 1px solid var(--danger); color: #fecaca; padding: 12px 16px; border-radius: 10px; white-space: pre-line; font-weight: 600; }
+.alert.ok { background: #14532d; border-color: var(--ok); color: #bbf7d0; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+th, td { padding: 7px 8px; border-bottom: 1px solid var(--line); text-align: center; white-space: nowrap; }
+th { color: var(--muted); font-weight: 600; }
+td.left { text-align: left; }
+tr.critical td { background: rgba(249, 115, 22, .12); }
+tr.critical td.id { color: var(--crit); font-weight: 700; }
+.badge { padding: 2px 8px; border-radius: 99px; font-size: .72rem; font-weight: 700; }
+.badge.yes { background: var(--crit); color: #1c1917; }
+.badge.no { background: var(--line); color: var(--muted); }
+.kpi { display: flex; flex-direction: column; gap: 2px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 12px; }
+.kpi span { font-size: .75rem; color: var(--muted); }
+.kpi strong { font-size: 1.4rem; color: var(--accent); }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-top: 14px; }
+.muted { color: var(--muted); font-size: .85rem; }
+.canvas-wrap { width: 100%; overflow-x: auto; margin-top: 8px; }
+canvas { width: 100%; display: block; background: var(--bg); border-radius: 8px; border: 1px solid var(--line); }
+.legend { display: flex; gap: 16px; font-size: .8rem; color: var(--muted); }
+.sw { display: inline-block; width: 14px; height: 10px; border-radius: 2px; margin-right: 6px; }
+.sw.crit { background: var(--crit); } .sw.norm { background: var(--norm); }
+.sw.slack { background: rgba(148, 163, 184, .35); border: 1px dashed var(--muted); }
+.ci-row { display: grid; grid-template-columns: 50px 1fr 60px; gap: 10px; align-items: center; margin: 4px 0; font-size: .85rem; }
+.ci-bar { background: var(--bg); border-radius: 6px; height: 14px; overflow: hidden; border: 1px solid var(--line); }
+.ci-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--norm), var(--crit)); }
+@media (max-width: 600px) { label.wide { grid-column: span 1; } }
