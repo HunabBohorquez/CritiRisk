@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CritiRisk — CPM/PERT y Monte Carlo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <h1>CritiRisk</h1>
+    <p>Ruta crítica CPM/PERT · Diagrama de Gantt · Simulación de riesgo Monte Carlo</p>
+  </header>
+
+  <main>
+    <div id="alertBox" class="alert" role="alert" hidden></div>
+
+    <section class="card">
+      <h2>1. Gestor de tareas</h2>
+      <form id="taskForm" autocomplete="off">
+        <input type="hidden" id="editingId">
+        <label>ID<input id="fId" placeholder="T1" required></label>
+        <label class="wide">Nombre<input id="fName" placeholder="Nombre de la tarea" required></label>
+        <label class="wide">Predecesoras<input id="fPreds" placeholder="T1, T2 (vacío si es inicial)"></label>
+        <label>Optimista (O)<input id="fO" type="number" min="0" step="any" required></label>
+        <label>Más probable (M)<input id="fM" type="number" min="0" step="any" required></label>
+        <label>Pesimista (P)<input id="fP" type="number" min="0" step="any" required></label>
+        <div class="actions">
+          <button type="submit" id="btnSave" class="primary">Agregar tarea</button>
+          <button type="button" id="btnCancel" hidden>Cancelar edición</button>
+        </div>
+      </form>
+      <div class="toolbar">
+        <button id="btnDemo">Cargar Proyecto Demo</button>
+        <button id="btnExport">Exportar JSON</button>
+        <button id="btnClear" class="danger">Vaciar proyecto</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. Resultados CPM / PERT</h2>
+      <div class="kpi"><span>Duración esperada del proyecto</span><strong id="projDuration">—</strong></div>
+      <div class="table-wrap">
+        <table id="resultTable">
+          <thead><tr>
+            <th>ID</th><th>Nombre</th><th>Pred.</th><th>O</th><th>M</th><th>P</th><th>te</th>
+            <th>ES</th><th>EF</th><th>LS</th><th>LF</th><th>Holgura</th><th>Crítica</th><th></th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p id="critPath" class="muted"></p>
+    </section>
+
+    <section class="card">
+      <h2>3. Diagrama de Gantt</h2>
+      <div class="legend">
+        <span><i class="sw crit"></i>Crítica</span>
+        <span><i class="sw norm"></i>No crítica</span>
+        <span><i class="sw slack"></i>Holgura disponible</span>
+      </div>
+      <div class="canvas-wrap"><canvas id="ganttCanvas" height="300"></canvas></div>
+    </section>
+
+    <section class="card">
+      <h2>4. Simulación de riesgo Monte Carlo</h2>
+      <div class="toolbar">
+        <label class="inline">Fecha límite objetivo (días)
+          <input id="deadline" type="number" min="0" step="any" value="18"></label>
+        <button id="btnMC" class="primary">Ejecutar Simulación Monte Carlo</button>
+      </div>
+      <div id="mcResults" hidden>
+        <div class="kpi-grid">
+          <div class="kpi"><span>Prob. de cumplir la fecha</span><strong id="mcProb">—</strong></div>
+          <div class="kpi"><span>Duración media</span><strong id="mcMean">—</strong></div>
+          <div class="kpi"><span>Desv. estándar</span><strong id="mcStd">—</strong></div>
+          <div class="kpi"><span>Percentil P90</span><strong id="mcP90">—</strong></div>
+        </div>
+        <div class="canvas-wrap"><canvas id="histCanvas" height="300"></canvas></div>
+        <h3>Índice de criticidad por tarea</h3>
+        <div id="critIndex"></div>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
